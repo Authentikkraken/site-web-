@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-1qyr=libn=bd5%m2i_k4g$0wp7x!n+g^91nefus97)*w*ok+*a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://lsymuslim-2b2c21d7f680.herokuapp.com/','http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['https://lsymuslim-2b2c21d7f680.herokuapp.com/','127.0.0.1']
 
 
 # Application definition
@@ -51,7 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'projet_mosquee.urls'

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os.path
 from pathlib import Path
 import dj_database_url
-import django
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 
 ]
@@ -80,17 +81,19 @@ WSGI_APPLICATION = 'projet_mosquee.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-#DATABASES = {
- #   'default': {
- #       'ENGINE': 'django.db.backends.sqlite3',
-  #      'NAME': BASE_DIR / 'db.sqlite3',
-   # }
-#}
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'USER':'',
+        'PASSWORD':'p401feee8252a65a658012751f5bde06da5111380848e9f93f43604e79400d366',
+        'HOST':'ec2-52-202-64-25.compute-1.amazonaws.com',
+         'PORT': '28700',
+
+   }
 }
 
-
+DATABASES ['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'), conn_max_age=600, ssl_require=True)
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -133,4 +136,6 @@ STATICFILES_DIRS= [BASE_DIR,'static']
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-#django_heroku.settings((locals()))
+
+django_heroku.settings(locals())
+
